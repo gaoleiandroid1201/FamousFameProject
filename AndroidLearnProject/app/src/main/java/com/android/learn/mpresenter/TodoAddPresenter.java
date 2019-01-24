@@ -17,14 +17,14 @@ public class TodoAddPresenter extends BasePresenter<TodoAddContract.View> implem
 
     @Override
     public void addTodo( Map<String, Object> map) {
-        Observable observable = mRestService.addTodo(map);
+        Observable observable = getMRestService().addTodo(map);
 
         addSubscribe(observable, new BaseObserver<BaseData>(false) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showAddTodo(data);
+                    getMView().showAddTodo(data);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
         });

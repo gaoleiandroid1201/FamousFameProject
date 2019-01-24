@@ -20,13 +20,13 @@ public class CollectPresenter extends BasePresenter<CollectContract.View> implem
     @Override
     public void getCollectList() {
 
-        Observable observable = mRestService.getCollectList(page);
+        Observable observable = getMRestService().getCollectList(page);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(true) {
 
             @Override
             public void onNext(BaseResponse<FeedArticleListData> data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showCollectList(data.getData());
+                    getMView().showCollectList(data.getData());
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -37,13 +37,13 @@ public class CollectPresenter extends BasePresenter<CollectContract.View> implem
     @Override
     public void cancelCollectArticle(final int position, final int id) {
 //        int id = feedArticleData.getId();
-        Observable observable = mRestService.cancelCollectArticle(id, -1);
+        Observable observable = getMRestService().cancelCollectArticle(id, -1);
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showCancelCollectArticle(position, id);
+                    getMView().showCancelCollectArticle(position, id);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 

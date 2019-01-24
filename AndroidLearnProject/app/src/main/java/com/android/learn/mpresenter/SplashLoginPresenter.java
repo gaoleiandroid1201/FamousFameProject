@@ -20,7 +20,7 @@ public class SplashLoginPresenter extends BasePresenter<SplashLoginContract.View
         addSubscribe(observable, new BaseObserver<RegisterLoginData>(false) {
             @Override
             public void onNext(RegisterLoginData data) {
-                    mView.showLoginResData(data);
+                    getMView().showLoginResData(data);
 
             }
         });

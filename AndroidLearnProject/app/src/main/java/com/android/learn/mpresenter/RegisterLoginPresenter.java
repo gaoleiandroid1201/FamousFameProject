@@ -22,7 +22,7 @@ public class RegisterLoginPresenter extends BasePresenter<RegisterLoginContract.
             @Override
             public void onNext(RegisterLoginData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showLoginResData(data);
+                    getMView().showLoginResData(data);
                 } else ResponseStatusUtil.handleResponseStatus(data);
 
             }
@@ -37,7 +37,7 @@ public class RegisterLoginPresenter extends BasePresenter<RegisterLoginContract.
             public void onNext(RegisterLoginData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     Utils.showToast("注册成功", true);
-                    mView.showRegisterResData(data);
+                    getMView().showRegisterResData(data);
                 } else ResponseStatusUtil.handleResponseStatus(data);
 
             }

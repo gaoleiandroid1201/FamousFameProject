@@ -18,11 +18,11 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
 
     @Override
     public void getFeedArticleList( String key) {
-        Observable observable = mRestService.search(mCurrentPage, key);
+        Observable observable = getMRestService().search(mCurrentPage, key);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(true) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData());
+                getMView().showArticleList(feedArticleListData.getData());
             }
         });
     }
@@ -30,24 +30,24 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
     @Override
     public void onLoadMore(String key) {
         ++mCurrentPage;
-        Observable observable = mRestService.search(mCurrentPage, key);
+        Observable observable = getMRestService().search(mCurrentPage, key);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(true) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData());
+                getMView().showArticleList(feedArticleListData.getData());
             }
         });
     }
     @Override
     public void addCollectArticle(final int position, final FeedArticleListData.FeedArticleData feedArticleData) {
-        Observable observable = mRestService.addCollectArticle(feedArticleData.getId());
+        Observable observable = getMRestService().addCollectArticle(feedArticleData.getId());
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(true);
-                    mView.showCollectArticleData(position, feedArticleData);
+                    getMView().showCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -57,14 +57,14 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
 
     @Override
     public void cancelCollectArticle(final int position, final FeedArticleListData.FeedArticleData feedArticleData) {
-        Observable observable = mRestService.cancelCollectArticle(feedArticleData.getId(), -1);
+        Observable observable = getMRestService().cancelCollectArticle(feedArticleData.getId(), -1);
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(false);
-                    mView.showCancelCollectArticleData(position, feedArticleData);
+                    getMView().showCancelCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 

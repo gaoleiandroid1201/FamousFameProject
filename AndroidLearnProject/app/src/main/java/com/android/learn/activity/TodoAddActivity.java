@@ -80,7 +80,7 @@ public class TodoAddActivity extends BaseMvpActivity<TodoAddPresenter> implement
 //                map.put("status",0);
                 map.put("type",0);
 
-                mPresenter.addTodo(map);
+                getMPresenter().addTodo(map);
                 break;
             case R.id.todo_date:
                 Calendar calendar = Calendar.getInstance();

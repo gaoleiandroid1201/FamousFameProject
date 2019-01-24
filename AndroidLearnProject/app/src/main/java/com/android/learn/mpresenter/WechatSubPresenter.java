@@ -18,12 +18,12 @@ public class WechatSubPresenter extends BasePresenter<WechatSubContract.View> im
     public int num=0;
     @Override
     public void getWxArtileById(int id) {
-        Observable observable = mRestService.getWxArtileById(id, num);
+        Observable observable = getMRestService().getWxArtileById(id, num);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(true) {
 
             @Override
             public void onNext(BaseResponse<FeedArticleListData> listData) {
-                mView.showWxArticleById(listData.getData());
+                getMView().showWxArticleById(listData.getData());
             }
 
         });
@@ -32,14 +32,14 @@ public class WechatSubPresenter extends BasePresenter<WechatSubContract.View> im
 
     @Override
     public void addCollectArticle(final int position, final FeedArticleData feedArticleData) {
-        Observable observable = mRestService.addCollectArticle(feedArticleData.getId());
+        Observable observable = getMRestService().addCollectArticle(feedArticleData.getId());
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(true);
-                    mView.showCollectArticleData(position, feedArticleData);
+                    getMView().showCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -49,14 +49,14 @@ public class WechatSubPresenter extends BasePresenter<WechatSubContract.View> im
 
     @Override
     public void cancelCollectArticle(final int position, final FeedArticleData feedArticleData) {
-        Observable observable = mRestService.cancelCollectArticle(feedArticleData.getId(), -1);
+        Observable observable = getMRestService().cancelCollectArticle(feedArticleData.getId(), -1);
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(false);
-                    mView.showCancelCollectArticleData(position, feedArticleData);
+                    getMView().showCancelCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -64,13 +64,13 @@ public class WechatSubPresenter extends BasePresenter<WechatSubContract.View> im
     }
 
     public void cancelCollectArticle(final int id) {
-        Observable observable = mRestService.cancelCollectArticle(id, -1);
+        Observable observable = getMRestService().cancelCollectArticle(id, -1);
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showCancelCollectArticleData(id);
+                    getMView().showCancelCollectArticleData(id);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 

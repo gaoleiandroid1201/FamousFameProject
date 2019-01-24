@@ -19,13 +19,13 @@ public class TodoPresenter extends BasePresenter<TodoContract.View> implements T
 
     @Override
     public void getListNotDone(int type) {
-        Observable observable = mRestService.getListNotDone(type, notDonePage);
+        Observable observable = getMRestService().getListNotDone(type, notDonePage);
         addSubscribe(observable, new BaseObserver<BaseResponse<TodoData>>(true) {
 
             @Override
             public void onNext(BaseResponse<TodoData> data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showListNotDone(data.getData());
+                    getMView().showListNotDone(data.getData());
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -35,13 +35,13 @@ public class TodoPresenter extends BasePresenter<TodoContract.View> implements T
 
     @Override
     public void getListDone(int type) {
-        Observable observable = mRestService.getListDone(type, donePage);
+        Observable observable = getMRestService().getListDone(type, donePage);
         addSubscribe(observable, new BaseObserver<BaseResponse<TodoData>>(true) {
 
             @Override
             public void onNext(BaseResponse<TodoData> data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showListDone(data.getData());
+                    getMView().showListDone(data.getData());
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -51,7 +51,7 @@ public class TodoPresenter extends BasePresenter<TodoContract.View> implements T
 
     @Override
     public void deleteTodo(int id) {
-        Observable observable = mRestService.deleteTodo(id);
+        Observable observable = getMRestService().deleteTodo(id);
 
         addSubscribe(observable, new BaseObserver<BaseData>(false) {
 
@@ -65,14 +65,14 @@ public class TodoPresenter extends BasePresenter<TodoContract.View> implements T
     //status: 0或1，传1代表未完成到已完成
     @Override
     public void updateTodoStatus(int id, int status) {
-        Observable observable = mRestService.updateTodoStatus(id, status);
+        Observable observable = getMRestService().updateTodoStatus(id, status);
 
         addSubscribe(observable, new BaseObserver<BaseData>(false) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showUpdateTodoStatus(data);
+                    getMView().showUpdateTodoStatus(data);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
         });

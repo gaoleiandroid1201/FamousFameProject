@@ -77,7 +77,7 @@ public class MyCollectActivity extends BaseMvpActivity<CollectPresenter> impleme
     @Override
     protected void loadData() {
         CustomProgressDialog.show(this);
-        mPresenter.getCollectList();
+        getMPresenter().getCollectList();
     }
 
 
@@ -115,7 +115,7 @@ public class MyCollectActivity extends BaseMvpActivity<CollectPresenter> impleme
         feedArticleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                mPresenter.cancelCollectArticle(position, feedArticleAdapter.getData().get(position).originId);
+                getMPresenter().cancelCollectArticle(position, feedArticleAdapter.getData().get(position).originId);
             }
         });
         feedArticleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -139,7 +139,7 @@ public class MyCollectActivity extends BaseMvpActivity<CollectPresenter> impleme
         smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                mPresenter.getCollectList();
+                getMPresenter().getCollectList();
 
             }
 

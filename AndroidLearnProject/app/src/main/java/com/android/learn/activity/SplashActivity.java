@@ -1,5 +1,6 @@
 package com.android.learn.activity;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,7 +48,7 @@ public class SplashActivity extends BaseMvpActivity<SplashLoginPresenter> implem
         String phone_num = (String) SPUtils.getParam(this, "username", "");
         String password = (String) SPUtils.getParam(this, "password", "");
         if (phone_num.length() > 0 && password.length() > 0) {
-            mPresenter.login(phone_num, password);
+            getMPresenter().login(phone_num, password);
         } else handler.sendEmptyMessageDelayed(0, 2000);
     }
 

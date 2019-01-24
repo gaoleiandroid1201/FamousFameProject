@@ -75,7 +75,7 @@ public class SearchResultActivity extends BaseMvpActivity<SearchPresenter> imple
 
     @Override
     protected void loadData() {
-        mPresenter.getFeedArticleList(keyword);
+        getMPresenter().getFeedArticleList(keyword);
     }
 
     @Override
@@ -128,9 +128,9 @@ public class SearchResultActivity extends BaseMvpActivity<SearchPresenter> imple
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (feedArticleAdapter.getData().get(position).isCollect()) {
-                    mPresenter.cancelCollectArticle(position, feedArticleAdapter.getData().get(position));
+                    getMPresenter().cancelCollectArticle(position, feedArticleAdapter.getData().get(position));
                 } else {
-                    mPresenter.addCollectArticle(position, feedArticleAdapter.getData().get(position));
+                    getMPresenter().addCollectArticle(position, feedArticleAdapter.getData().get(position));
                 }
             }
         });
@@ -145,7 +145,7 @@ public class SearchResultActivity extends BaseMvpActivity<SearchPresenter> imple
         smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                mPresenter.onLoadMore(keyword);
+                getMPresenter().onLoadMore(keyword);
             }
 
 

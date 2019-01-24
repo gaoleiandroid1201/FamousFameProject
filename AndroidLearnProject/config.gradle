@@ -1,16 +1,16 @@
 ext {
 
     android = [
-            compileSdkVersion: 26,
-            buildToolsVersion: "26.0.2",
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.2",
             minSdkVersion    : 15,
-            targetSdkVersion : 26,
-            versionCode      : 101,
-            versionName      : "1.0.1"
+            targetSdkVersion : 28,
+            versionCode      : 102,
+            versionName      : "1.0.2"
     ]
 
     version = [
-            androidSupportSdkVersion: "26+",
+            androidSupportSdkVersion: "28.+",
             retrofitSdkVersion      : "2.3.0",
             glideSdkVersion         : "4.0.0",
             butterknifeSdkVersion   : "8.4.0",
@@ -19,8 +19,9 @@ ext {
 
 
     dependencies = [
-            appcompatV7                    : "com.android.support:appcompat-v7:26+",
-            design                         : "com.android.support:design:26+",
+            appcompatV7                    : "com.android.support:appcompat-v7:28+",
+            design                         : "com.android.support:design:28+",
+            cardview                       : "com.android.support:cardview-v7:28+",
             "constraint-layout"            : "com.android.support.constraint:constraint-layout:1.1.0",
 
             "okhttp3"                      : "com.squareup.okhttp3:okhttp:3.10.0",
