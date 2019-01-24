@@ -17,22 +17,22 @@ public class KnowledgeChildPresenter extends BasePresenter<KnowledgeChildContrac
 
     @Override
     public void getKnowledgeArticleList(int num, int cid) {
-        Observable observable = mRestService.getKnowledgeArticleList(num, cid);
+        Observable observable = getMRestService().getKnowledgeArticleList(num, cid);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(true) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData(), false);
+                getMView().showArticleList(feedArticleListData.getData(), false);
             }
         });
     }
 
     @Override
     public void onRefreshMore(int cid) {
-        Observable observable = mRestService.getKnowledgeArticleList(-1, cid);
+        Observable observable = getMRestService().getKnowledgeArticleList(-1, cid);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(false) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData(), true);
+                getMView().showArticleList(feedArticleListData.getData(), true);
             }
         });
 
@@ -42,25 +42,25 @@ public class KnowledgeChildPresenter extends BasePresenter<KnowledgeChildContrac
     @Override
     public void onLoadMore(int cid) {
         ++mCurrentPage;
-        Observable observable = mRestService.getKnowledgeArticleList(mCurrentPage, cid);
+        Observable observable = getMRestService().getKnowledgeArticleList(mCurrentPage, cid);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(false) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData(), false);
+                getMView().showArticleList(feedArticleListData.getData(), false);
             }
         });
     }
 
     @Override
     public void addCollectArticle(final int position, final FeedArticleData feedArticleData) {
-        Observable observable = mRestService.addCollectArticle(feedArticleData.getId());
+        Observable observable = getMRestService().addCollectArticle(feedArticleData.getId());
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(true);
-                    mView.showCollectArticleData(position, feedArticleData);
+                    getMView().showCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -70,14 +70,14 @@ public class KnowledgeChildPresenter extends BasePresenter<KnowledgeChildContrac
 
     @Override
     public void cancelCollectArticle(final int position, final FeedArticleData feedArticleData) {
-        Observable observable = mRestService.cancelCollectArticle(feedArticleData.getId(), -1);
+        Observable observable = getMRestService().cancelCollectArticle(feedArticleData.getId(), -1);
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(false);
-                    mView.showCancelCollectArticleData(position, feedArticleData);
+                    getMView().showCancelCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 

@@ -85,7 +85,7 @@ public class TodoEditActivity extends BaseMvpActivity<TodoEditPresenter> impleme
                 map.put("status",0);
                 map.put("type",0);
 
-                mPresenter.updateTodo(datasBean.getId(),map);
+                getMPresenter().updateTodo(datasBean.getId(),map);
                 break;
             case R.id.todo_date:
                 Calendar calendar = Calendar.getInstance();

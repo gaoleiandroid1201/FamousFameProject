@@ -88,7 +88,7 @@ public class RegisterLoginActivity extends BaseMvpActivity<RegisterLoginPresente
             case R.id.tv_login:
                 String username = et_login_phone_num.getText().toString();
                 String password = et_login_password.getText().toString();
-                mPresenter.login(username, password);
+                getMPresenter().login(username, password);
                 break;
             case R.id.tv_register_free:
                 layout_register.setVisibility(View.VISIBLE);
@@ -116,7 +116,7 @@ public class RegisterLoginActivity extends BaseMvpActivity<RegisterLoginPresente
                     return;
                 }
 
-                mPresenter.register(username, password, confirmPassword);
+                getMPresenter().register(username, password, confirmPassword);
                 break;
         }
 

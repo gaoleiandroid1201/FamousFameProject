@@ -24,13 +24,13 @@ public class MainActivityPresenter extends BasePresenter<MainActivityContract.Vi
 
     @Override
     public void getHotKey() {
-        Observable observable = mRestService.getHotKey();
+        Observable observable = getMRestService().getHotKey();
         addSubscribe(observable, new BaseObserver<BaseResponse<List<HotKeyData>>>(true) {
 
             @Override
             public void onNext(BaseResponse<List<HotKeyData>> datas) {
                 if (datas.errorCode == BaseData.SUCCESS) {
-                    mView.showHotKey(datas.data);
+                    getMView().showHotKey(datas.data);
                 } else ResponseStatusUtil.handleResponseStatus(datas);
             }
 

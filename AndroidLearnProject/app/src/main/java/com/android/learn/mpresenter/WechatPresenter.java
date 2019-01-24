@@ -22,11 +22,11 @@ public class WechatPresenter extends BasePresenter<WechatContract.View> implemen
 
     @Override
     public void getWxArticle() {
-        Observable observable = mRestService.getWxArticle();
+        Observable observable = getMRestService().getWxArticle();
         addSubscribe(observable, new BaseObserver<BaseResponse<List<WxArticle>>>(false) {
             @Override
             public void onNext(BaseResponse<List<WxArticle>> datas) {
-                mView.showWxArticle(datas.data);
+                getMView().showWxArticle(datas.data);
             }
         });
     }

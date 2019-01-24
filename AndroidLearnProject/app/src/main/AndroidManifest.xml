@@ -15,9 +15,9 @@
     <application
         android:name=".base.application.CustomApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/app_icon2"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/app_icon2"
+        android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme">
@@ -32,7 +32,14 @@
         </activity>
 
         <activity android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+            android:configChanges="orientation|keyboardHidden|screenSize">
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
         <activity android:name=".activity.ArticleDetailActivity"></activity>
         <activity android:name=".activity.SettingActivity"></activity>
         <activity android:name=".activity.MyCollectActivity"></activity>

@@ -83,7 +83,7 @@ public class KnowledgeChildActivity extends BaseMvpActivity<KnowledgeChildPresen
     @Override
     protected void loadData() {
         CustomProgressDialog.show(this);
-        mPresenter.getKnowledgeArticleList(0, cid);
+        getMPresenter().getKnowledgeArticleList(0, cid);
     }
 
     @Override
@@ -135,9 +135,9 @@ public class KnowledgeChildActivity extends BaseMvpActivity<KnowledgeChildPresen
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (feedArticleAdapter.getData().get(position).isCollect()) {
-                    mPresenter.cancelCollectArticle(position, feedArticleAdapter.getData().get(position));
+                    getMPresenter().cancelCollectArticle(position, feedArticleAdapter.getData().get(position));
                 } else {
-                    mPresenter.addCollectArticle(position, feedArticleAdapter.getData().get(position));
+                    getMPresenter().addCollectArticle(position, feedArticleAdapter.getData().get(position));
                 }
             }
         });
@@ -152,12 +152,12 @@ public class KnowledgeChildActivity extends BaseMvpActivity<KnowledgeChildPresen
         smartRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                mPresenter.onLoadMore(cid);
+                getMPresenter().onLoadMore(cid);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                mPresenter.onRefreshMore(cid);
+                getMPresenter().onRefreshMore(cid);
             }
         });
     }

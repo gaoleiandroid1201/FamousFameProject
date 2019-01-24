@@ -20,11 +20,11 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void onRefreshMore() {
-        Observable observable = mRestService.getFeedArticleList(-1);
+        Observable observable = getMRestService().getFeedArticleList(-1);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(false) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData(), true);
+                getMView().showArticleList(feedArticleListData.getData(), true);
             }
         });
 
@@ -34,34 +34,34 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     @Override
     public void onLoadMore() {
         ++mCurrentPage;
-        Observable observable = mRestService.getFeedArticleList(mCurrentPage);
+        Observable observable = getMRestService().getFeedArticleList(mCurrentPage);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(false) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData(), false);
+                getMView().showArticleList(feedArticleListData.getData(), false);
             }
         });
     }
 
     @Override
     public void getFeedArticleList(int num) {
-        Observable observable = mRestService.getFeedArticleList(num);
+        Observable observable = getMRestService().getFeedArticleList(num);
         addSubscribe(observable, new BaseObserver<BaseResponse<FeedArticleListData>>(true) {
             @Override
             public void onNext(BaseResponse<FeedArticleListData> feedArticleListData) {
-                mView.showArticleList(feedArticleListData.getData(), false);
+                getMView().showArticleList(feedArticleListData.getData(), false);
             }
         });
     }
 
     @Override
     public void getBannerInfo() {
-        Observable observable = mRestService.getBannerListData();
+        Observable observable = getMRestService().getBannerListData();
         addSubscribe(observable, new BaseObserver<BannerListData>(true) {
 
             @Override
             public void onNext(BannerListData bannerListData) {
-                mView.showBannerList(bannerListData);
+                getMView().showBannerList(bannerListData);
             }
 
         });
@@ -72,14 +72,14 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void addCollectArticle(final int position, final FeedArticleData feedArticleData) {
-        Observable observable = mRestService.addCollectArticle(feedArticleData.getId());
+        Observable observable = getMRestService().addCollectArticle(feedArticleData.getId());
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(true);
-                    mView.showCollectArticleData(position, feedArticleData);
+                    getMView().showCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -89,14 +89,14 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void cancelCollectArticle(final int position, final FeedArticleData feedArticleData) {
-        Observable observable = mRestService.cancelCollectArticle(feedArticleData.getId(), -1);
+        Observable observable = getMRestService().cancelCollectArticle(feedArticleData.getId(), -1);
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
                     feedArticleData.setCollect(false);
-                    mView.showCancelCollectArticleData(position, feedArticleData);
+                    getMView().showCancelCollectArticleData(position, feedArticleData);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 
@@ -104,13 +104,13 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     }
 
     public void cancelCollectArticle(final int id) {
-        Observable observable = mRestService.cancelCollectArticle(id, -1);
+        Observable observable = getMRestService().cancelCollectArticle(id, -1);
         addSubscribe(observable, new BaseObserver<BaseData>(true) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showCancelCollectArticleData(id);
+                    getMView().showCancelCollectArticleData(id);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
 

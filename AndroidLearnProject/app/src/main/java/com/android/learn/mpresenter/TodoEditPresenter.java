@@ -19,14 +19,14 @@ public class TodoEditPresenter extends BasePresenter<TodoEditContract.View> impl
 
     @Override
     public void updateTodo(int id, Map<String, Object> map) {
-        Observable observable = mRestService.updateTodo(id, map);
+        Observable observable = getMRestService().updateTodo(id, map);
 
         addSubscribe(observable, new BaseObserver<BaseData>(false) {
 
             @Override
             public void onNext(BaseData data) {
                 if (data.errorCode == BaseData.SUCCESS) {
-                    mView.showUpdateTodo(data);
+                    getMView().showUpdateTodo(data);
                 } else ResponseStatusUtil.handleResponseStatus(data);
             }
         });

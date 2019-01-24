@@ -26,11 +26,11 @@ public class KnowledgePresenter extends BasePresenter<KnowledgeContract.View> im
     @Override
     public void getKnowledge() {
 
-        Observable observable = mRestService.getKnowledgeTree();
+        Observable observable = getMRestService().getKnowledgeTree();
         BaseObserver baseObserver=new BaseObserver<BaseResponse<List<TreeBean>>>(false) {
             @Override
             public void onNext(BaseResponse<List<TreeBean>> datas) {
-                mView.showKnowledge(datas.data);
+                getMView().showKnowledge(datas.data);
             }
         };
         baseObserver.setCancelDialog(false);
